@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:33:12 by edforte           #+#    #+#             */
-/*   Updated: 2024/10/08 19:52:31 by edforte          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:10:05 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*routine(void *data_pointer)
 	philo = data_pointer;
 	while (table->dead == 0 || table->finished == 0)
 	{
-		
+		//ciao come stai
 	}
 }
 
