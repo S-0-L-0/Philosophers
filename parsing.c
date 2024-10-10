@@ -9,7 +9,6 @@
 /*   Updated: 2024/10/08 19:16:41 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "philo.h"
 
 void	set_forks(t_data *table)
@@ -62,6 +61,7 @@ void	set_table(t_data *table, char **av)
 		table->meals_nb = (int)ft_atoi(av[5]);
 	table->dead = 0;
 	table->finished = 0;
+	table->start_time = get_time();
 	pthread_mutex_init(&table->write, NULL);
 	pthread_mutex_init(&table->lock, NULL);
 }
