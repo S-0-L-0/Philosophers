@@ -133,7 +133,7 @@ int	parse_arguments(int argc, char **argv, t_simulation *sim)
 
 	if (argc < 5 || argc > 6)
 	{
-		print_error("Usage: ./philo num_philosophers time_to_die time_to_eat time_to_sleep [num_meals]");
+		print_error("Usage: ./philo num_philos time_to_die time_to_eat time_to_sleep [num_meals]");
 		return (1);
 	}
 	
@@ -150,13 +150,13 @@ int	parse_arguments(int argc, char **argv, t_simulation *sim)
 	}
 	
 	/* Parse required arguments and check for overflow */
-	sim->num_philosophers = ft_atoi(argv[1]);
+	sim->num_philos = ft_atoi(argv[1]);
 	sim->time_to_die = ft_atoi(argv[2]);
 	sim->time_to_eat = ft_atoi(argv[3]);
 	sim->time_to_sleep = ft_atoi(argv[4]);
 	
 	/* ✅ FIX: Check for ft_atoi overflow */
-	if (sim->num_philosophers == -1 || sim->time_to_die == -1 || 
+	if (sim->num_philos == -1 || sim->time_to_die == -1 || 
 		sim->time_to_eat == -1 || sim->time_to_sleep == -1)
 	{
 		print_error("Arguments too large (overflow)");

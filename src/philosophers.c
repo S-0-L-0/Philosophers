@@ -88,7 +88,7 @@ void	think(t_philosopher *philo)
 	
 	/* Small delay to prevent busy waiting and improve fairness */
 	/* For odd number of philosophers, thinking time helps prevent starvation */
-	if (philo->sim->num_philosophers % 2 == 1)
+	if (philo->sim->num_philos % 2 == 1)
 	{
 		long	think_time;
 		

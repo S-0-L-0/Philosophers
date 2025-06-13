@@ -7,10 +7,8 @@ static int	start_simulation(t_simulation *sim)
 
 	sim->start_time = get_timestamp();
 	created_threads = 0;
-	
-	/* Initialize last_meal_time for all philosophers */
 	i = 0;
-	while (i < sim->num_philosophers)
+	while (i < sim->num_philos)
 	{
 		sim->philosophers[i].last_meal_time = sim->start_time;
 		i++;
@@ -18,7 +16,7 @@ static int	start_simulation(t_simulation *sim)
 	
 	/* Create philosopher threads */
 	i = 0;
-	while (i < sim->num_philosophers)
+	while (i < sim->num_philos)
 	{
 		if (pthread_create(&sim->philosophers[i].thread, NULL, 
 			philosopher_routine, &sim->philosophers[i]) != 0)
@@ -43,7 +41,7 @@ static int	start_simulation(t_simulation *sim)
 		sim->simulation_ended = 1;
 		/* Wait for all philosopher threads */
 		i = 0;
-		while (i < sim->num_philosophers)
+		while (i < sim->num_philos)
 		{
 			pthread_join(sim->philosophers[i].thread, NULL);
 			i++;
@@ -63,7 +61,7 @@ static void	join_threads(t_simulation *sim)
 	
 	/* Wait for all philosopher threads to finish */
 	i = 0;
-	while (i < sim->num_philosophers)
+	while (i < sim->num_philos)
 	{
 		pthread_join(sim->philosophers[i].thread, NULL);
 		i++;
@@ -85,7 +83,7 @@ int	main(int argc, char **argv)
 	}
 	
 	/* Handle special case: single philosopher */
-	if (sim.num_philosophers == 1)
+	if (sim.num_philos == 1)
 	{
 		printf("0 1 %s\n", MSG_FORK);
 		precise_usleep(sim.time_to_die * 1000);

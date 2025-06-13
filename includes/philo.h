@@ -49,14 +49,13 @@ typedef struct s_philosopher
 	int					left_fork_id;		/* ✅ FIX: Store indices for ordering */
 	int					right_fork_id;		/* ✅ FIX: Store indices for ordering */
 	pthread_mutex_t		death_mutex;
-	pthread_mutex_t		meal_mutex;
 	t_simulation		*sim;
 }	t_philosopher;
 
 /* Main simulation structure */
 typedef struct s_simulation
 {
-	int					num_philosophers;
+	int					num_philos;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;

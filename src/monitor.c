@@ -38,7 +38,7 @@ int	check_philosopher_death(t_simulation *sim)
 	current_time = get_timestamp();
 	i = 0;
 	
-	while (i < sim->num_philosophers)
+	while (i < sim->num_philos)
 	{
 		pthread_mutex_lock(&sim->philosophers[i].death_mutex);
 		time_since_meal = current_time - sim->philosophers[i].last_meal_time;
@@ -73,16 +73,16 @@ int	check_all_fed(t_simulation *sim)
 	fed_count = 0;
 	i = 0;
 	
-	while (i < sim->num_philosophers)
+	while (i < sim->num_philos)
 	{
-		pthread_mutex_lock(&sim->philosophers[i].meal_mutex);
+		pthread_mutex_lock(&sim->philosophers[i].death_mutex);
 		if (sim->philosophers[i].meals_eaten >= sim->target_meals)
 			fed_count++;
-		pthread_mutex_unlock(&sim->philosophers[i].meal_mutex);
+		pthread_mutex_unlock(&sim->philosophers[i].death_mutex);
 		i++;
 	}
 	
-	if (fed_count == sim->num_philosophers)
+	if (fed_count == sim->num_philos)
 	{
 		end_simulation(sim);
 		return (1);

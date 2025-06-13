@@ -1,7 +1,10 @@
-init_mutex 29 righe
-init_philosophers 44 righe 1 riga 98 col
+
 cleanup_simulation 27 righe
 start_simulation 41 righe
 take_forks 37 righe
 philosophers_routine 28 righe
 parse_argument 43 righe 1 riga 106 col
+
+199 800 200 200
+200 810 200 200
+10 410 200 200
