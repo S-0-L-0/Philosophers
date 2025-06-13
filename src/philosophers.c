@@ -58,16 +58,16 @@ int	take_forks(t_philosopher *philo)
 
 void eat(t_philosopher *philo)
 {
-    print_status(philo, MSG_EAT);
-    
-    /* Eat for the specified time */
-    precise_usleep(philo->sim->time_to_eat * 1000);
-    
-    /* Update last meal time and count AFTER eating completes */
-    pthread_mutex_lock(&philo->death_mutex);
-    philo->last_meal_time = get_timestamp();
-    philo->meals_eaten++;
-    pthread_mutex_unlock(&philo->death_mutex);
+	print_status(philo, MSG_EAT);
+	
+	/* Eat for the specified time */
+	precise_usleep(philo->sim->time_to_eat * 1000);
+	
+	/* Update last meal time and count AFTER eating completes */
+	pthread_mutex_lock(&philo->death_mutex);
+	philo->last_meal_time = get_timestamp();
+	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->death_mutex);
 }
 
 void	release_forks(t_philosopher *philo)
@@ -100,41 +100,42 @@ void	think(t_philosopher *philo)
 
 void *philosopher_routine(void *arg)
 {
-    t_philosopher *philo = (t_philosopher *)arg;
-    
-    /* Staggered start for even distribution */
-    if (philo->id % 2 == 0)
-        precise_usleep(1000);
-    
-    /* ⭐ PRIMA MANGIATA PER RESETTARE DEATH TIMER */
-    if (take_forks(philo) == 0) {
-        eat(philo);
-        release_forks(philo);
-        
-        if (!simulation_should_end(philo))
-            philo_sleep(philo);
-    }
-    
-    /* ⭐ POI CICLO NORMALE */
-    while (!simulation_should_end(philo)) {
-        think(philo);
-        
-        if (simulation_should_end(philo))
-            break;
-        
-        if (take_forks(philo) == 0) {
-            eat(philo);
-            release_forks(philo);
-            
-            if (simulation_should_end(philo))
-                break;
-            
-            philo_sleep(philo);
-        }
-        else {
-            break;
-        }
-    }
-    
-    return (NULL);
+	t_philosopher *philo = (t_philosopher *)arg;
+	
+	/* Staggered start for even distribution */
+	if (philo->id % 2 == 0)
+		precise_usleep(1000);
+	
+	/* ⭐ PRIMA MANGIATA PER RESETTARE DEATH TIMER */
+	if (take_forks(philo) == 0)
+	{
+		eat(philo);
+		release_forks(philo);
+		
+		if (!simulation_should_end(philo))
+			philo_sleep(philo);
+	}
+	
+	/* ⭐ POI CICLO NORMALE */
+	while (!simulation_should_end(philo))
+	{
+		think(philo);
+		
+		if (simulation_should_end(philo))
+			break;
+		
+		if (take_forks(philo) == 0) {
+			eat(philo);
+			release_forks(philo);
+			
+			if (simulation_should_end(philo))
+				break;
+			
+			philo_sleep(philo);
+		}
+		else
+			break;
+	}
+	
+	return (NULL);
 }
